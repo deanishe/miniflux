@@ -105,6 +105,6 @@ function items_list($status)
         'nb_items'            => $nb_items,
         'nb_unread_items'     => $nb_unread_items,
         'group_id'            => $group_id,
-        'groups'              => Model\Group\get_all($user_id),
+        'groups'              => Model\Group\get_all_with_counts($user_id),
     );
 }

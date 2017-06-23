@@ -7,7 +7,7 @@
         <ul id="grouplist">
             <?php foreach ($groups as $group): ?>
             <li  <?php echo $group['id'] == $group_id ? 'class="active"' : '' ?>>
-                <a href="?action=unread&group_id=<?php echo$group['id']?>"><?php echo$group['title']?></a>
+                <a href="?action=unread&group_id=<?php echo$group['id']?>"><?php echo$group['title']?></a>&nbsp;(<?php echo $group['unread_count'] ?>)
             </li>
             <?php endforeach ?>
         </ul>

@@ -2,6 +2,7 @@
 
 namespace Miniflux\Model\Group;
 
+use Miniflux\Model\Feed;
 use PicoDb\Database;
 
 const TABLE      = 'groups';
@@ -14,6 +15,23 @@ function get_all($user_id)
         ->eq('user_id', $user_id)
         ->orderBy('title')
         ->findAll();
+}
+
+function get_all_with_counts($user_id)
+{
+    $groups_counts = array();
+    $groups = get_all($user_id);
+    $feeds = Feed\get_feeds_with_items_count_and_groups($user_id);
+    foreach ($feeds as $feed) {
+        foreach ($feed['groups'] as $group) {
+            $id = $group['id'];
+            $groups_counts[$id] = isset($groups_counts[$id]) ? $groups_counts[$id] + $feed['items_unread'] : $feed['items_unread'];
+        }
+    }
+    foreach ($groups as &$group) {
+        $group['unread_count'] = $groups_counts[$group['id']];
+    }
+    return $groups;
 }
 
 function get_group($user_id, $group_id)
