@@ -951,6 +951,17 @@ html[dir="rtl"] span.items-count:before {
     content: "";
 }
 
+.unread-count {
+    font-size: 0.85em;
+    font-style: normal;
+    color: #777;
+}
+
+
+.empty {
+    color: #777;
+}
+
 /* desktop design */
 @media only screen and (min-width: 480px) {
 
